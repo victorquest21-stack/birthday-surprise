@@ -1,0 +1,476 @@
+body {
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+  }
+  
+  /* THEMES */
+  .past { background:#f6dfe7; }
+  .present { background:#def5ea; }
+  .future { background:#e1e7ff; }
+  .final { background:#ffe6f0; }
+  
+  /* TITLE */
+  .title {
+    position:fixed;
+    top:8px;
+    width:100%;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#ff4da6;
+    animation:glow 2s infinite alternate;
+  }
+  
+  @keyframes glow {
+    from { text-shadow:0 0 5px #ff99cc; }
+    to { text-shadow:0 0 25px #ff4da6; }
+  }
+  
+  /* HEADER */
+  .header {
+    position:fixed;
+    top:50px;
+    width:100%;
+    text-align:center;
+  }
+  
+  /* LAYOUT */
+  .wrapper {
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .slider {
+    display:flex;
+    width:100%;
+    transition:transform 0.5s ease;
+  }
+  
+  .slide {
+    min-width:100%;
+    display:flex;
+    justify-content:center;
+  }
+  
+  /* ENVELOPE */
+  .envelope-wrapper {
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  
+  .envelope {
+    width:420px;
+    height:260px;
+    background:#f0f0f0;
+    border-radius:18px;
+    position:relative;
+    cursor:pointer;
+    transition:all 0.5s ease;
+  }
+  
+  .flap {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff4da6;
+    clip-path:polygon(0 0,100% 0,50% 60%);
+    transform-origin:top;
+    transition:0.5s;
+  }
+  
+  .seal {
+    position:absolute;
+    bottom:85px;
+    left:50%;
+    transform:translateX(-50%);
+    width:50px;
+    height:50px;
+    background:radial-gradient(circle,#ff99cc,#ff4da6);
+    border-radius:50%;
+  }
+  
+  .envelope.open {
+    transform:translateY(120px) scale(0.4);
+  }
+  
+  .envelope.open .flap {
+    transform:rotateX(180deg);
+  }
+  
+  /* BIRTHDAY TEXT */
+  .birthday-text {
+    position:absolute;
+    top:-70px; /* sits between cards & envelope */
+    font-size:26px;
+    font-style:italic;
+    display:flex;
+    gap:8px;
+  }
+  
+  .birthday-text span {
+    opacity:0;
+    transform:translateY(20px);
+  }
+  
+  .show-bday span {
+    animation:wordPop 0.6s ease forwards;
+  }
+  
+  @keyframes wordPop {
+    0% { opacity:0; transform:translateY(20px) scale(0.8); }
+    60% { opacity:1; transform:translateY(-5px) scale(1.05); }
+    100% { opacity:1; transform:translateY(0) scale(1); }
+  }
+  
+  /* CARDS */
+  .card-container {
+    position:absolute;
+    top:-140px; /* more breathing room */
+  
+    display:flex;
+    gap:18px;
+  
+    padding:0 12px;
+    justify-content:center;
+  }
+
+  .card {
+    min-width:110px;
+    max-width:140px;
+    min-height:110px;
+  
+    padding:14px 12px;
+  
+    background: rgba(255,255,255,0.9);
+    border-radius:18px;
+  
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  
+    font-size:13px;
+    line-height:1.4;
+  
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  
+    opacity:0;
+    transform:translateY(30px);
+    transition:transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card.show {
+    animation:up 0.5s forwards;
+  }
+  .card.stack {
+    transform: translateY(0) scale(0.95);
+    opacity: 0.9;
+  }
+  
+  .card.hide {
+    animation:slideIntoEnvelope 0.5s ease forwards;
+  }
+  
+  @keyframes slideIntoEnvelope {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(10px) scale(0.95);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(80px) scale(0.7);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes up {
+    to { transform:translateY(0); opacity:1; }
+  }
+  @keyframes down {
+    to { transform:translateY(60px); opacity:0; }
+  }
+  
+  .card:hover {
+    transform:scale(1.1) translateY(-10px);
+  }
+  
+  /* BUTTONS */
+  .controls {
+    position:fixed;
+    bottom:25px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:40px;
+  }
+  
+  button {
+    padding:14px 22px;
+    font-size:16px;
+    border:none;
+    border-radius:20px;
+    background:#ff4da6;
+    color:white;
+  }
+  
+  /* FINAL */
+  .finalText {
+    position:fixed;
+    top:40%;
+    width:100%;
+    text-align:center;
+    font-size:32px;
+    opacity:0;
+  }
+  
+  .finalText.show {
+    animation:fade 1.5s forwards;
+  }
+  
+  @keyframes fade {
+    to { opacity:1; }
+  }
+  
+  canvas {
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+  }
+
+  @media (max-width: 480px) {
+
+    .envelope {
+      width:320px;
+      height:200px;
+    }
+  
+    .card {
+      min-width:95px;
+      max-width:120px;
+      font-size:12px;
+      padding:12px;
+    }
+  
+    .card-container {
+      gap:12px;
+      top:-120px;
+    }
+  
+    .birthday-text {
+      font-size:20px;
+      top:-55px;
+    }
+  }
+
+  .final-birthday span {
+    font-size:28px;
+    font-weight:bold;
+    color:#ff4da6;
+    text-shadow:
+      0 0 10px #ff99cc,
+      0 0 20px #ff66b2,
+      0 0 30px #ff4da6;
+  
+    animation: shimmer 2s infinite alternate;
+  }
+
+  .typewriter {
+    position:absolute;
+    top:-140px;
+    width:90%;
+    text-align:center;
+  
+    font-size:15px;
+    line-height:1.6;
+  
+    opacity:0;
+    transform:translateY(20px);
+    transition:0.5s;
+  }
+  
+  .show-type {
+    opacity:1;
+    transform:translateY(0);
+  }
+  
+  .cursor {
+    display:inline-block;
+    animation:blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    50% { opacity:0; }
+  }
+  
+  @keyframes shimmer {
+    from { text-shadow:0 0 10px #ff99cc; }
+    to { text-shadow:0 0 30px #ff4da6; }
+  }
+  
+  /* FINAL CARDS ANIMATION */
+  .final .card.show {
+    animation: finalCardUp 0.8s ease forwards;
+  }
+  
+  @keyframes finalCardUp {
+    from { transform:translateY(40px); opacity:0; }
+    to { transform:translateY(0); opacity:1; }
+  }
+
+  /* GIFT */
+.gift {
+    position:fixed;
+    bottom:12vh;
+    right:5vw;
+    font-size:40px;
+    cursor:pointer;
+    animation:bounce 1.5s infinite;
+  }
+  
+  @keyframes bounce {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-8px); }
+  }
+  
+  .gift-bubble {
+    position:absolute;
+    bottom:50px;
+    right:0;
+    background:white;
+    padding:6px 10px;
+    border-radius:12px;
+    font-size:12px;
+  }
+  
+  /* DIALOG */
+  .dialog {
+    position:fixed;
+    bottom:140px;
+    right:20px;
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    width: min(85vw, 260px);
+  }
+  
+  .dialog button {
+    margin:5px;
+  }
+  
+  .hidden {
+    display:none;
+  }
+
+  #gift2 {
+    bottom:150px;
+    right:30px;
+    font-size:42px;
+    animation:popIn 0.5s ease;
+  }
+  
+  @keyframes popIn {
+    from { transform:scale(0); }
+    to { transform:scale(1); }
+  }
+
+  /* PROMPT */
+.presence-prompt {
+  position:fixed;
+  top:100px;
+  width:100%;
+  text-align:center;
+  font-size:16px;
+}
+
+.presence-prompt button {
+  margin:10px;
+  padding:6px 14px;
+  border-radius:12px;
+  border:none;
+  background:#ff4da6;
+  color:white;
+}
+
+/* PET LAYER */
+.pets {
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%); /* FIXED */
+  width:100%;
+  z-index:50;
+}
+
+.pet {
+  position:absolute;
+  width: clamp(90px, 12.5vw, 155px);
+  height: clamp(90px, 12.5vw, 155px);
+  z-index:60;
+  transition:all 0.4s ease;
+  animation: idleBounce 2.5s infinite ease-in-out;
+}
+
+.pet img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.dog { left:2vw; }
+.cat { right:2vw; }
+
+.pets.peek .dog {
+  transform: translateX(60px) scale(1.05);
+}
+
+.pets.peek .cat {
+  transform: translateX(-60px) scale(1.05);
+}
+
+.blink {
+  position:absolute;
+  top:25%;
+  left:15%;
+  width:70%;
+  height:35%;
+  background:#f7d7c4;
+  border-radius:50%;
+  opacity:0;
+  animation: blinkAnim 4s infinite;
+}
+
+@keyframes blinkAnim {
+  0%,95%,100% { opacity:0; }
+  96%,98% { opacity:1; }
+}
+
+.hidden { display:none; }
+
+@keyframes idleBounce {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+
+/* LEAN ANIMATION */
+.cat.lean {
+  transform: translateX(-20px) rotate(-10deg);
+}
+
+/*Audio */
+.audio-btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 100;
+}

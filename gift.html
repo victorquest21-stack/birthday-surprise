@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🎁 Your Gift</title>
+<style>
+
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg,#ffe6f0,#fff0f5);
+  font-family: 'Segoe UI', sans-serif;
+  text-align:center;
+}
+
+.title {
+  font-size:28px;
+  color:#ff4da6;
+  margin-bottom:20px;
+  animation:fadeIn 1.2s ease;
+}
+
+.cake {
+  font-size:80px;
+  cursor:pointer;
+  animation:bounce 2s infinite;
+}
+
+.note {
+  margin-top:20px;
+  font-size:16px;
+  color:#555;
+}
+
+.hidden {
+  display:none;
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+@keyframes bounce {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-10px); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="title">🎉 Happy Birthday 🎉</div>
+
+<div id="cake" class="cake">🎂</div>
+
+<div id="msg" class="note">Tap the cake 🎁</div>
+
+<script>
+
+const cake = document.getElementById("cake");
+const msg = document.getElementById("msg");
+
+cake.onclick = () => {
+
+  cake.innerText = "🍰"; // cake sliced
+
+  msg.innerText = "Here’s your cake 🐶💗 Enjoy it!";
+
+  // confetti effect
+  for (let i = 0; i < 30; i++) {
+    const el = document.createElement("div");
+    el.innerText = "💗";
+    el.style.position = "fixed";
+    el.style.left = Math.random()*100 + "vw";
+    el.style.top = "-20px";
+    el.style.fontSize = "20px";
+
+    document.body.appendChild(el);
+
+    let y = 0;
+    const fall = setInterval(() => {
+      y += 3;
+      el.style.top = y + "px";
+      if (y > window.innerHeight) {
+        clearInterval(fall);
+        el.remove();
+      }
+    },16);
+  }
+};
+
+</script>
+
+</body>
+</html>

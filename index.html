@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday 🐶💗🐱</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="past">
+
+<canvas id="bg"></canvas>
+
+<div id="audioToggle" class="audio-btn">🔇</div>
+
+<div class="title">🎂 Happy Birthday Dear Puppy 💗</div>
+<div class="header" id="headerText">🌸 Past — You came this far</div>
+
+<div class="wrapper">
+  <div class="slider" id="slider"></div>
+</div>
+
+<div id="presencePrompt" class="presence-prompt">
+  Want company? 🐾
+  <div>
+    <button id="yesComp">Yes</button>
+    <button id="noComp">No</button>
+  </div>
+</div>
+
+<div id="petLayer" class="pets hidden">
+  <div id="dog" class="pet dog">
+    <img src="images/dog.png">
+    <div class="blink"></div>
+  </div>
+
+  <div id="cat" class="pet cat">
+    <img src="images/cat.png">
+    <div class="blink"></div>
+  </div>
+</div>
+
+<div class="controls">
+  <button id="backBtn">⬅️ Back</button>
+  <button id="nextBtn">Next ➡️</button>
+</div>
+
+<div id="giftContainer" class="gift hidden">
+  🎁
+  <div class="gift-bubble">Open me</div>
+</div>
+
+<div id="gift2" class="gift hidden">
+  🎁
+  <div class="gift-bubble">I was kidding… open me 👀</div>
+</div>
+
+<div id="dialogBox" class="dialog hidden"></div>
+
+<div id="finalText" class="finalText">🎉 HAPPY BIRTHDAY 🎉</div>
+
+<script src="script.js"></script>
+</body>
+</html>
